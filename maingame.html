@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        * {
+            font-family: "Pixelify Sans", sans-serif;
+        }
+
+        canvas {
+            display: block;
+            background-image: url(bamboo.jpg);
+        }
+
+
+        #endGameScreen {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+            width: 500px;
+            max-width: 80%;
+        }
+
+
+        #endGameScreen .panda-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            background-image: url(pandastand.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 20px;
+            opacity: 1;
+        }
+
+
+        #endGameScreen .panda-container .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+
+        #endGameScreen h1 {
+            font-size: 38px;
+            margin-bottom: 20px;
+            color:rgb(14, 218, 92);
+            animation: zoomInOut 1s ease infinite alternate;
+        }
+
+
+        #finalScore {
+        font-weight: bold;
+        color: #0d6225;
+        }
+
+
+        #scoreDisplay {
+        color: #0d6225;
+        }
+
+
+        #instructionText {
+        font-size: 24px;
+        color: #808080;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+    }
+
+
+
+
+        @keyframes zoomInOut {
+             0% {
+                 transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+
+        #endGameScreen p {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: rgb(45, 154, 35);
+        }
+
+
+        #finalScore {
+            font-weight: bold;
+        }
+
+
+        #endGameScreen button {
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+
+        #endGameScreen button:hover {
+            background-color: #45a049;
+        }
+
+
+        #pauseButton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            font-size: 30px;
+            width: 200px;
+            color: rgb(120, 47, 166);
+            background-image: linear-gradient(rgb(255, 238, 86), rgb(255, 104, 10), #ff460e);
+            border-color: #ff460e;
+            border-width: 10px;
+        }
+        #backButton {
+            position: absolute;
+            top: 100px;
+            left: 10px;
+            padding: 10px;
+            font-size: 30px;
+            width: 200px;
+            color: rgb(120, 47, 166);
+            background-image: linear-gradient(rgb(255, 238, 86), rgb(255, 104, 10), #ff460e);
+            border-color: #ff460e;
+            border-width: 10px;
+        }
+
+
+        #pauseButton:hover {
+            background-image: linear-gradient(rgb(228, 209, 39), rgb(202, 83, 9), #c0380f);
+        }
+    </style>
+    <title>Floppy Panda Game</title>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+
+
+    <div id="endGameScreen">
+        <div class="panda-container">
+            <div class="content">
+                <h1>GAME OVER!</h1>
+                <p>Your Score: <span id="finalScore"></span></p>
+                <button onclick="restartGame()">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+
+    <button id="pauseButton" onclick="togglePause()">Pause</button>
+    <button id="backButton" onclick="menu()">Back</button>
+
+
+    <div id="instructionText"></div>
+
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+
+        const bird = {
+            x: 50,
+            y: canvas.height / 2 - 15,
+            width: 60,
+            height: 50,
+            color: "#FFD700",
+            velocityY: 0,
+            gravity: 0.3,
+            jumpStrength: 6,
+        };
+
+
+        const obstacles = [];
+        let score = 0;
+        let gameOver = false;
+        let paused = false;
+        let instructionVisible = true;
+
+
+        function initializeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+
+        function drawBird() {
+            const birdImage = new Image();
+            birdImage.src = 'pandafly.png';
+            ctx.drawImage(birdImage, bird.x, bird.y, bird.width, bird.height);
+        }
+
+
+        function drawObstacles() {
+            for (const obstacle of obstacles) {
+                ctx.fillStyle = "#1c6e2e";
+                ctx.fillRect(obstacle.x, obstacle.yTop, obstacle.width, obstacle.heightTop);
+                ctx.fillRect(obstacle.x, obstacle.yBottom, obstacle.width, obstacle.heightBottom);
+            }
+        }
+
+
+        function moveBird() {
+            bird.velocityY += bird.gravity;
+            bird.y += bird.velocityY;
+
+
+            if (bird.y + bird.height > canvas.height) {
+                bird.y = canvas.height - bird.height;
+                bird.velocityY = 0;
+            }
+
+
+            if (bird.y < 0) {
+                bird.y = 0;
+                bird.velocityY = 0;
+            }
+        }
+
+
+        function generateObstacle() {
+            const gap = 300;
+            const obstacleHeight = Math.floor(Math.random() * (canvas.height - gap - 100)) + 50;
+            const obstacle = {
+                x: canvas.width,
+                yTop: 0,
+                yBottom: obstacleHeight + gap,
+                width: 30,
+                heightTop: obstacleHeight,
+                heightBottom: canvas.height - obstacleHeight - gap,
+            };
+
+
+            obstacles.push(obstacle);
+        }
+
+
+        function moveObstacles() {
+    for (let i = obstacles.length - 1; i >= 0; i--) {
+        obstacles[i].x -= 3;
+
+
+        if (obstacles[i].x + obstacles[i].width < bird.x && !obstacles[i].passed) {
+            obstacles[i].passed = true;
+            if (!gameOver) {
+                score++;
+            }
+        }
+
+
+        if (obstacles[i].x + obstacles[i].width < 0) {
+            obstacles.splice(i, 1);
+        }
+    }
+}
+
+
+
+
+
+
+        function endGame() {
+            document.getElementById("finalScore").textContent = score;
+            document.getElementById("endGameScreen").style.display = "block";
+            cancelAnimationFrame(requestID);
+            gameOver = true;
+        }
+       
+        function checkCollision() {
+            if (gameOver || paused) return;
+            for (const obstacle of obstacles) {
+                if (
+                    bird.x < obstacle.x + obstacle.width &&
+                    bird.x + bird.width > obstacle.x &&
+                    bird.y < obstacle.yTop + obstacle.heightTop &&
+                    bird.y + bird.height > obstacle.yTop
+                ) {
+                    endGame();
+                    return;
+                }
+                if (
+                    bird.x < obstacle.x + obstacle.width &&
+                    bird.x + bird.width > obstacle.x &&
+                    bird.y < obstacle.yBottom + obstacle.heightBottom &&
+                    bird.y + bird.height > obstacle.yBottom
+                ) {
+                    endGame();
+                    return;
+                }
+
+
+                if (bird.y + bird.height > canvas.height) {
+                    endGame();
+                    return;
+                }
+                if (bird.x > obstacle.x + obstacle.width && !obstacle.passed) {
+                    obstacle.passed = true;
+                    score++;
+                }
+            }
+        }
+
+
+        function togglePause() {
+            paused = !paused;
+            if (!paused) {
+                document.getElementById("pauseButton").textContent = "Pause";
+                gameLoop();
+            } else {
+                document.getElementById("pauseButton").textContent = "Play";
+            }
+        }
+
+        function menu() {
+            window.location.href = 'index_gamewebsite.html' ;
+        }
+
+
+        function restartGame() {
+            document.getElementById("endGameScreen").style.display = "none";
+            resetGame();
+            initializeCanvas();
+            clearInterval(obstacleInterval);
+            obstacleInterval = setInterval(generateObstacle, 1500);
+            gameLoop();
+        }
+
+
+        function resetGame() {
+            bird.y = canvas.height / 2 - 15;
+            bird.velocityY = 0;
+            obstacles.length = 0;
+            score = 0;
+            gameOver = false;
+            paused = false;
+        }
+
+
+        function updateGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+            moveBird();
+            moveObstacles();
+            checkCollision();
+
+
+            drawBird();
+            drawObstacles();
+
+
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "30px Arial";
+            ctx.fillText("Score: " + score, canvas.width - 150, 50);
+
+
+            if (instructionVisible) {
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "24px Arial";
+                ctx.fillText("Click SPACE to jump", canvas.width / 2 - 120, canvas.height / 2);
+            }
+        }
+
+
+        function gameLoop() {
+            if (!paused) {
+                updateGame();
+                requestID = requestAnimationFrame(gameLoop);
+            } else {
+                cancelAnimationFrame(requestID);
+            }
+        }
+
+
+        window.addEventListener("keydown", function (event) {
+            if (event.code === "Space") {
+                if (instructionVisible) {
+                    instructionVisible = false;
+                } else {
+                    bird.velocityY = -bird.jumpStrength;
+                }
+            }
+        });
+
+
+        setInterval(generateObstacle, 1500);
+
+
+        initializeCanvas();
+        gameLoop();
+    </script>
+</body>
+</html>
+
+
+

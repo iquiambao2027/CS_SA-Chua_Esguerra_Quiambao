@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floppy Panda Menu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <style>
+
+        body {
+            background-image: url(MENU.svg);
+            background-size: cover;
+        }
+        * {
+            text-align: center;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+        
+        button {
+            padding: 10px;
+            font-size: 30px;
+            margin-bottom: 10px;
+            margin-top: 5px;
+            width: 300px;
+            color: rgb(120, 47, 166);
+            background-image: linear-gradient(rgb(255, 238, 86), rgb(255, 104, 10), #ff460e);
+            border-color: #ff460e;
+            border-width: 10px;
+        }
+
+        button:hover {
+            background-image: linear-gradient(rgb(228, 209, 39), rgb(202, 83, 9), #c0380f);
+        }
+        h1 {
+            font-size: 150px;
+            margin-bottom: -20px;
+            margin-top: 0px;
+            color: #00B18B;
+        }
+        #desc {
+            margin-bottom: 50px;
+            font-size: 30px;
+        }
+        #buttonstop{
+            text-align: left;
+            margin-top: 10px;
+            margin-left: 15px;
+            font-size: 30px;
+        }
+        #buttonsbottom {
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="buttons" id="buttonstop">
+        <button onclick="menu()">MENU</button>
+    <br>
+        <button onclick="tips()">TIPS & TRICKS</button>
+    <br>
+        <button onclick="menu()">QUIT</button>
+</div>
+    <div class="words">
+        <h1>FLOPPYPANDA</h1>
+        <p id="desc">Get as many points as you can!</p>
+    </div>
+    <div class="buttons" id="buttonsbottom">
+        <button onclick="game()">START</button><br>
+
+        <button onclick="about()">ABOUT</button><br>
+    </div>
+
+    <script>
+        function menu() {
+            window.location.href = 'index_gamewebsite.html' ;
+        }
+        function tips() {
+            window.location.href = 'tipsandtricks.html' ;
+        }
+        function game() {
+            window.location.href = 'maingame.html';
+        }
+        function about() {
+            window.location.href = 'about.html';
+        }
+    </script>
+
+</body>
+</html>

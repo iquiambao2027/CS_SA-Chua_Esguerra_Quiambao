@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <title>Tips & Tricks</title>
+    <style>
+        body {
+            background-image: url(ABOUT.svg);
+            background-repeat: no-repeat;
+            background-color: rgb(34, 87, 34);
+        }
+        * {
+            text-align: center;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+        button {
+            padding: 10px;
+            font-size: 30px;
+            margin-bottom: 10px;
+            margin-top: 5px;
+            width: 300px;
+            color: rgb(120, 47, 166);
+            background-image: linear-gradient(rgb(255, 238, 86), rgb(255, 104, 10), #ff460e);
+            border-color: #ff460e;
+            border-width: 10px;
+        }
+        button:hover {
+            background-image: linear-gradient(rgb(228, 209, 39), rgb(202, 83, 9), #c0380f);
+        }
+        .buttonstop{
+            text-align: left;
+            margin-left: 15px;
+            margin-top: 10px;
+        }
+        h1 {
+            font-size: 150px;
+            margin-bottom: -20px;
+            margin-top: -200px;
+            color: #00B18B;
+        }
+    </style>
+</head>
+<body>
+    <div class="top">
+        <div class="buttonstop">
+            <button onclick="menu()">MENU</button>
+        <br>
+            <button onclick="tips()">TIPS & TRICKS</button>
+        <br>
+            <button onclick="menu()">QUIT</button>
+    </div>
+        <div class="title">
+            <h1>TIPS & TRICKS</h1>
+            <h2>Having a hard time winning? Here are some tips & tricks for you!</h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 p-5">
+                <h2>1. Master the timing</h2>
+                <h4>
+                    Practice tapping at the right moment to keep the panda flying smoothly between obstacles. Consistent timing is key to success.
+                </h4>
+                <br>
+                <br>
+                <br>
+                <br>
+                <h2>2. Stay calm and focused</h2>
+                <h4>
+                    Avoid getting frustrated and stay focused on the game. Panicking can lead to mistimed taps and crashes.
+                </h4>
+                <br>
+                <br>
+                <br>
+                <h2>3. Study the patterns</h2>
+                <h4>
+                    Observe the patterns and learn when to tap to navigate through them effectively. Knowing the patterns will help you anticipate and react faster.
+                </h4>
+            </div>
+            <div class="col-sm-6 p-5">
+                <h2>4. Use short taps</h2>
+                <h4>
+                    Instead of holding down for long taps, use short and quick taps to adjust the panda’s height more precisely, especially when navigating tight spaces.
+                </h4>
+                <br>
+                <br>
+                <br>
+                <h2>5. Change your fly pattern</h2>
+                <h4>
+                    Persevere and eventually you'll reach the finish line! Just keep on trying it over and over until you find something that clicks.
+                </h4>
+                <br>
+                <br>
+                <br>
+                <h2>6. Take breaks</h2>
+                <h4>
+                    Don’t forget to take breaks to rest your eyes and mind. Playing continously for too long can lead to fatigue and decreased<br>performance.
+                </h4>
+            </div>
+        </div>
+    </div>
+    <script>
+        function menu() {
+            window.location.href = 'index_gamewebsite.html' ;
+        }
+        function tips() {
+            window.location.href = 'tipsandtricks.html' ;
+        }
+    </script>
+</body>
+</html>

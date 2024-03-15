@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <title>About the Devs</title>
+    <style>
+        body {
+            background-image: url(ABOUT.svg);
+            background-repeat: no-repeat;
+            background-color: rgb(34, 87, 34);
+        }
+        * {
+            text-align: center;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+        img {
+            width: 500px;
+            height: 500px;
+        }
+        .about {
+            transform: translateY(50px);
+            text-align: center;
+        }
+        .row {
+            text-align: center;
+            transform: translateY(50px);
+        }
+        button {
+            padding: 10px;
+            font-size: 30px;
+            margin-bottom: 10px;
+            margin-top: 5px;
+            width: 300px;
+            color: rgb(120, 47, 166);
+            background-image: linear-gradient(rgb(255, 238, 86), rgb(255, 104, 10), #ff460e);
+            border-color: #ff460e;
+            border-width: 10px;
+        }
+        button:hover {
+            background-image: linear-gradient(rgb(228, 209, 39), rgb(202, 83, 9), #c0380f);
+        }
+        .buttonstop{
+            text-align: left;
+            margin-left: 15px;
+            margin-top: 10px;
+        }
+        h1 {
+            font-size: 150px;
+            margin-bottom: -20px;
+            margin-top: -200px;
+            color: #00B18B;
+        }
+        h2 {
+            margin-top: -60px;
+        }
+        #refs {
+            margin-top: 300px;
+        }
+        .refslink {
+            font-size: 30px;
+        }
+        .refslink a {
+            color: white;
+        }
+        .refslink p {
+            text-align: left;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top">
+    <div class="buttonstop">
+            <button onclick="menu()">MENU</button>
+        <br>
+            <button onclick="tips()">TIPS & TRICKS</button>
+        <br>
+            <button onclick="menu()">QUIT</button>
+    </div>
+    <div class="about">
+        <h1>ABOUT THE DEVS</h1>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="nixpanda.png" alt="nix">
+            <h2>ANGELIE NICOLE "NIX" CHUA</h2>
+            <h4>MAIN CODER OF THE GAME</h4>
+        </div>
+        <div class="col-sm-4">
+            <img src="yeshapanda.png" alt="yesha">
+            <h2>AYESHA LUCILLE "YESHA" ESGUERRA</h2>
+            <h4>DESIGNER & CONTENTS WRITER OF THE GAME</h4>
+        </div>
+        <div class="col-sm-4">
+            <img src="zoepanda.png" alt="zoe">
+            <h2>ISABELLE ZOE QUIAMBAO</h2>
+            <h4>CODER & SPRITES ARTIST OF THE GAME</h4>
+        </div>
+    </div>
+    <div class="row">
+        <h1 id="refs">REFERENCES</h1>
+        <div class="refslink">
+        <br>
+        <p><a href="https://www.w3schools.com/graphics/game_intro.asp">https://www.w3schools.com/graphics/game_intro.asp</a></p>
+        <p><a href="https://www.w3schools.com/graphics/game_obstacles.asp">https://www.w3schools.com/graphics/game_obstacles.asp</a></p>
+        <p><a href="https://stackoverflow.com/questions/76778147/how-to-change-my-rectangles-to-an-image-of-a-bird-for-my-flappy-bird-game">https://stackoverflow.com/questions/76778147/how-to-change-my-rectangles-to-an-image-of-a-bird-for-my-flappy-bird-game</a></p>
+        <p><a href="https://www.pcmag.com/news/7-tips-for-high-scores-on-flappy-bird">https://www.pcmag.com/news/7-tips-for-high-scores-on-flappy-bird</a></p>
+        <br>
+    </div>
+    </div>
+    
+<script>
+    function menu() {
+        window.location.href = 'index_gamewebsite.html' ;
+    }
+    function tips() {
+        window.location.href = 'tipsandtricks.html' ;
+    }
+</script>
+</body>
+</html>
